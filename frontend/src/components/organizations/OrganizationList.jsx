@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
     Box,
     Button,
@@ -31,7 +31,7 @@ const OrganizationList = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [loading, setLoading] = useState(true);
 
-    const fetchOrganizations = async () => {
+    const fetchOrganizations = useCallback(async () => {
         try {
             const response = await axios.get(`${API_URL}/organizations`, {
                 params: { search: searchTerm }
@@ -42,11 +42,11 @@ const OrganizationList = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [searchTerm]);
 
     useEffect(() => {
         fetchOrganizations();
-    }, [searchTerm]);
+    }, [fetchOrganizations]);
 
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this organization?')) {
