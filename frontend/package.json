@@ -19,6 +19,9 @@
     "react-scripts": "5.0.1",
     "serve": "^14.2.1"
   },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+  },
   "scripts": {
     "start": "serve -s build",
     "dev": "react-scripts start",
